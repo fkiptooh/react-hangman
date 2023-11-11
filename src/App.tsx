@@ -6,10 +6,20 @@ import { HangmanKeyboard } from "./components/hangman-keyboard";
 
 export const App = () => {
   const [wordToGuess, setWordToGuess] = useState(() => {
-    return words[Math.floor(Math.random() * words.length)];
+    return "test";
+
+    // return words[Math.floor(Math.random() * words.length)];
   });
 
-  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([
+    "g",
+    "m",
+    "t",
+  ]);
+
+  const incorrectLetters = guessedLetters.filter(
+    (letter) => !wordToGuess.includes(letter)
+  );
   return (
     <div
       style={{
@@ -22,9 +32,15 @@ export const App = () => {
       }}
     >
       <div style={{ fontSize: "2rem", textAlign: "center" }}>Won or Lost</div>
-      <HangmanDrawing />
+      <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
       <HangmanWord />
-      <HangmanKeyboard />
+      <div
+        style={{
+          alignSelf: "stretch",
+        }}
+      >
+        <HangmanKeyboard />
+      </div>
     </div>
   );
 };
