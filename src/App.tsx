@@ -4,18 +4,14 @@ import { HangmanDrawing } from "./components/hangman-drawing";
 import { HangmanWord } from "./components/hangman-word";
 import { HangmanKeyboard } from "./components/hangman-keyboard";
 
+const fetchWord = () => {
+  return words[Math.floor(Math.random() * words.length)];
+};
+
 export const App = () => {
-  const [wordToGuess, setWordToGuess] = useState(() => {
-    return "test";
+  const [wordToGuess, setWordToGuess] = useState(fetchWord);
 
-    // return words[Math.floor(Math.random() * words.length)];
-  });
-
-  const [guessedLetters, setGuessedLetters] = useState<string[]>([
-    "g",
-    "m",
-    "t",
-  ]);
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
@@ -33,7 +29,7 @@ export const App = () => {
     >
       <div style={{ fontSize: "2rem", textAlign: "center" }}>Won or Lost</div>
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
-      <HangmanWord />
+      <HangmanWord guessedLetters={guessedLetters} wordToGuess={wordToGuess} />
       <div
         style={{
           alignSelf: "stretch",
