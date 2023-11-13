@@ -28,6 +28,7 @@ const KEYS = [
   "y",
   "z",
 ];
+
 export const HangmanKeyboard = () => {
   return (
     <div
